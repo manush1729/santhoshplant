@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
         quote = findViewById(R.id.quotes);
+        backgroundVideo();
                quote.setText(quotes[(int) Math.floor(Math.random() * quotes.length)]);
                enter = findViewById(R.id.login);
                enter.setOnClickListener(new View.OnClickListener() {
@@ -33,4 +34,17 @@ public class MainActivity extends AppCompatActivity {
                });
     }
 
+    public void backgroundVideo()
+    {
+        background = (VideoView) findViewById(R.id.videoView);
+        Uri uri = Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.background);
+        background.setVideoURI(uri);
+        background.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mediaPlayer) {
+                mediaPlayer.setLooping(true);
+            }
+        });
+        background.start();
+    }
 }
